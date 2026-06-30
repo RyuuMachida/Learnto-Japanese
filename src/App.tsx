@@ -455,6 +455,10 @@ export default function App() {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [selectedAnswer, setSelectedAnswer] = useState<string | null>(null);
   const [isAnswered, setIsAnswered] = useState(false);
+  const isAnsweredRef = useRef(isAnswered);
+  useEffect(() => {
+    isAnsweredRef.current = isAnswered;
+  }, [isAnswered]);
   const [score, setScore] = useState(0);
   const [quizFinished, setQuizFinished] = useState(false);
   const [quizHistory, setQuizHistory] = useState<QuizHistoryItem[]>([]);
@@ -1068,7 +1072,7 @@ export default function App() {
   };
 
   const startSpeechRecognition = async () => {
-    if (isListening || isAnswered) return;
+    if (isListening || isAnsweredRef.current) return;
 
     const SpeechRecognitionClass = window.SpeechRecognition || window.webkitSpeechRecognition;
 
@@ -1101,6 +1105,8 @@ export default function App() {
     recognition.interimResults = true;
     recognition.maxAlternatives = 5;
 
+    let latestTranscript = '';
+
     // Timeout keamanan jika hening selama 12 detik berturut-turut untuk menghentikan mic
     let silenceTimeout: any;
     const resetSilenceTimeout = () => {
@@ -1108,7 +1114,11 @@ export default function App() {
       silenceTimeout = setTimeout(() => {
         if (recognitionRef.current === recognition) {
           stopSpeechRecognition();
-          setSpeakingRecognizedText('Perekam suara dinonaktifkan (hening). Ketuk kembali ikon mic untuk mengulangi.');
+          if (!isAnsweredRef.current && latestTranscript) {
+            handleAnswerSubmit(latestTranscript);
+          } else {
+            setSpeakingRecognizedText('Perekam suara dinonaktifkan (hening). Ketuk kembali ikon mic untuk mengulangi.');
+          }
         }
       }, 12000);
     };
@@ -1123,6 +1133,12 @@ export default function App() {
       setIsListening(false);
       recognitionRef.current = null;
       clearTimeout(silenceTimeout);
+
+      // Jika error terjadi tetapi user sempat merekam suara, submit suara tersebut
+      if (!isAnsweredRef.current && latestTranscript) {
+        handleAnswerSubmit(latestTranscript);
+        return;
+      }
 
       const errorMessages: Record<string, string> = {
         'no-speech': 'Suara tidak terdengar. Silakan ketuk mic dan ucapkan lafalnya.',
@@ -1141,10 +1157,14 @@ export default function App() {
       if (recognitionRef.current === recognition) {
         recognitionRef.current = null;
       }
+      // Fallback mobile: Jika mic otomatis berhenti dan user sempat berbicara, submit jawabannya
+      if (!isAnsweredRef.current && latestTranscript) {
+        handleAnswerSubmit(latestTranscript);
+      }
     };
 
     recognition.onresult = (event: SpeechRecognitionEvent) => {
-      if (isAnswered) return;
+      if (isAnsweredRef.current) return;
       resetSilenceTimeout();
 
       const { transcript, isCorrect, isFinal } = evaluateSpeechResults(
@@ -1154,6 +1174,7 @@ export default function App() {
       );
 
       if (transcript) {
+        latestTranscript = transcript;
         setSpeakingRecognizedText(`"${transcript}"`);
       }
 
