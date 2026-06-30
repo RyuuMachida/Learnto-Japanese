@@ -188,6 +188,15 @@ const KATAKANA_DATA = [
 
 const AVAILABLE_ROWS = ['Semua', 'A', 'Ka', 'Sa', 'Ta', 'Na', 'Ha', 'Ma', 'Ya', 'Ra', 'Wa'];
 
+const QUIZ_TYPE_OPTIONS = [
+  { id: 'Semua', label: 'Semua Tipe Soal' },
+  { id: 'multiple-choice', label: 'Pilihan Ganda' },
+  { id: 'typing', label: 'Mengetik Romaji' },
+  { id: 'speaking', label: 'Pengucapan Suara' },
+  { id: 'matching', label: 'Cocokkan Kartu' },
+  { id: 'writing', label: 'Menggambar Aksara' }
+];
+
 interface MatchingPair {
   kana: string;
   romaji: string;
@@ -262,11 +271,11 @@ const deduplicateCharsAndWords = (text: string): string => {
 };
 
 const PHONETIC_MAP: Record<string, string[]> = {
-  a: ['a', 'ah', 'are', 'ar', 'あ', 'ア', '阿', '亜'],
-  i: ['i', 'ee', 'each', 'eat', 'い', 'イ', '胃', '意', '医', '井', '衣', '位', '委'],
-  u: ['u', 'oo', 'who', 'you', 'yoo', 'う', 'ウ', '宇', '有', '羽'],
-  e: ['e', 'eh', 'ay', 'a', 'え', 'エ', '絵', '重', '衣'],
-  o: ['o', 'oh', 'owe', 'or', 'お', 'オ', 'を', '尾', '男', '御'],
+  a: ['a', 'ah', 'are', 'ar', 'up', 'an', 'at', 'as', 'am', 'あ', 'ア', '阿', '亜'],
+  i: ['i', 'ee', 'each', 'eat', 'it', 'in', 'is', 'y', 'e', 'い', 'イ', '胃', '意', '医', '井', '衣', '位', '委'],
+  u: ['u', 'oo', 'who', 'you', 'yoo', 'uh', 'o', 'to', 'two', 'through', 'up', 'us', 'う', 'ウ', '宇', '有', '羽'],
+  e: ['e', 'eh', 'ay', 'a', 'he', 'hey', 'pay', 'え', 'エ', '絵', '重', '衣'],
+  o: ['o', 'oh', 'owe', 'or', 'all', 'ok', 'of', 'on', 'who', 'wo', 'を', 'ヲ', 'おう', 'お', 'オ', '尾', '男', '御'],
   ka: ['ka', 'car', 'cut', 'か', 'カ', '蚊', '課', '科', '香', '下', '化', '加'],
   ki: ['ki', 'key', 'gee', 'き', 'キ', '木', '気', '期', '機', '黄', '来'],
   ku: ['ku', 'coo', 'cool', 'く', 'ク', '区', '苦', '九', '工'],
@@ -278,8 +287,8 @@ const PHONETIC_MAP: Record<string, string[]> = {
   se: ['se', 'say', 'set', 'せ', 'セ', '背', '瀬'],
   so: ['so', 'sew', 'saw', 'そ', 'ソ', '粗', '祖', '素'],
   ta: ['ta', 'tar', 'touch', 'た', 'タ', '田', '多', '太'],
-  chi: ['chi', 'chee', 'cheap', 'ち', 'チ', '血', '地', '知', '千'],
-  tsu: ['tsu', 'too', 'two', 'sue', 'つ', 'ツ', '津', '都'],
+  chi: ['chi', 'chee', 'cheap', 'she', 'tea', 'qi', 'key', 'ci', 'c', 'ち', 'チ', '血', '地', '知', '千'],
+  tsu: ['tsu', 'too', 'two', 'sue', 'ts', 'chu', 'zu', 'zoo', 'つ', 'ツ', '津', '都'],
   te: ['te', 'tay', 'take', 'て', 'テ', '手', '天'],
   to: ['to', 'toe', 'two', 'と', 'ト', '都', '図', '戸', '外'],
   na: ['na', 'nah', 'now', 'な', 'ナ', '名', '菜', '無'],
@@ -289,7 +298,7 @@ const PHONETIC_MAP: Record<string, string[]> = {
   no: ['no', 'know', 'の', 'ノ', '野'],
   ha: ['ha', 'hah', 'hot', 'は', 'ハ', '歯', '葉', '波', '羽'],
   hi: ['hi', 'hee', 'he', 'ひ', 'ヒ', '火', '日', '比', '非', '避'],
-  fu: ['fu', 'who', 'foo', 'ふ', 'フ', '二', '府', '婦', '夫', '符'],
+  fu: ['fu', 'who', 'foo', 'hu', 'full', 'for', 'ふ', 'フ', '二', '府', '婦', '夫', '符'],
   he: ['he', 'hay', 'hair', 'へ', 'ヘ', '経', '辺', '屁'],
   ho: ['ho', 'hoe', 'home', 'ほ', 'ホ', '帆', '歩', '火', '保'],
   ma: ['ma', 'mah', 'my', 'ま', 'マ', '間', '真', '魔'],
@@ -301,7 +310,7 @@ const PHONETIC_MAP: Record<string, string[]> = {
   yu: ['yu', 'you', 'yoo', 'ゆ', 'ユ', '湯', '弓', '由', '輸'],
   yo: ['yo', 'yow', 'your', 'よ', 'ヨ', '夜', '余', '四', '与'],
   ra: ['ra', 'rah', 'run', 'ら', 'ラ', '等', '裸'],
-  ri: ['ri', 'ree', 're', 'り', 'リ', '利', '理', '里', '陸'],
+  ri: ['ri', 'ree', 're', 'り', 'リ', '利', '理', 'RE', 'ri.', '里', '陸'],
   ru: ['ru', 'roo', 'rule', 'る', 'ル', '留', '流', '類'],
   re: ['re', 'ray', 'red', 'れ', 'レ', '例', '礼', '冷'],
   ro: ['ro', 'row', 'road', 'ろ', 'ロ', '路', '炉', '露'],
@@ -360,6 +369,9 @@ const isSpeechCorrect = (resultText: string, kana: string, romaji: string): bool
   if (resultHiragana.includes(normalizedKana)) return true;
   if (cleanResult === cleanRomaji) return true;
   if (isRepeatedRomaji(cleanResult, cleanRomaji)) return true;
+
+  // Jika romaji adalah huruf vokal pendek (length 1), toleransi kata pendek <= 3 huruf yang mengandung romaji tersebut (misal: "on", "oh", "ok" untuk "o")
+  if (cleanRomaji.length === 1 && cleanResult.length <= 3 && cleanResult.includes(cleanRomaji)) return true;
 
   if (cleanRomaji.length >= 2 && cleanResult.includes(cleanRomaji)) return true;
 
@@ -460,11 +472,18 @@ export default function App() {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement | null>(null);
 
+  const [selectedQuizTypes, setSelectedQuizTypes] = useState<string[]>(['Semua']);
+  const [isTypeDropdownOpen, setIsTypeDropdownOpen] = useState(false);
+  const typeDropdownRef = useRef<HTMLDivElement | null>(null);
+
   // Click outside listener untuk custom dropdown
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
         setIsDropdownOpen(false);
+      }
+      if (typeDropdownRef.current && !typeDropdownRef.current.contains(event.target as Node)) {
+        setIsTypeDropdownOpen(false);
       }
     };
     document.addEventListener('mousedown', handleClickOutside);
@@ -1342,11 +1361,22 @@ export default function App() {
     const isSpeechSupported = typeof window !== 'undefined' && ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window);
 
     const questions: QuizQuestion[] = selectedQuestions.map((item) => {
-      const possibleTypes: QuizQuestion['type'][] = ['multiple-choice', 'typing', 'writing', 'matching'];
-      if (isSpeechSupported) {
-        possibleTypes.push('speaking');
+      // Dapatkan tipe-tipe soal yang dipilih oleh pengguna
+      const chosenTypes = selectedQuizTypes.includes('Semua')
+        ? ['multiple-choice', 'typing', 'writing', 'matching', 'speaking']
+        : selectedQuizTypes;
+
+      // Filter tipe soal agar hanya menggunakan tipe yang didukung perangkat
+      let possibleTypes = chosenTypes.filter((t) => {
+        if (t === 'speaking') return isSpeechSupported;
+        return ['multiple-choice', 'typing', 'writing', 'matching'].includes(t);
+      }) as QuizQuestion['type'][];
+
+      // Fallback jika tidak ada tipe soal yang cocok
+      if (possibleTypes.length === 0) {
+        possibleTypes = ['multiple-choice'];
       }
-      
+
       const type = possibleTypes[Math.floor(Math.random() * possibleTypes.length)];
       
       let isQuestionKana = Math.random() > 0.5;
@@ -1862,7 +1892,7 @@ export default function App() {
             <div className="grid grid-cols-1 md:grid-cols-12 gap-4 items-center">
               
               {/* Sektor Jenis Aksara */}
-              <div className="md:col-span-4 flex flex-col gap-1.5">
+              <div className="md:col-span-3 flex flex-col gap-1.5">
                 <label className="text-xs font-bold text-slate-400 uppercase tracking-wider">Aksara Utama</label>
                 <div className="grid grid-cols-2 p-1 bg-slate-100 rounded-xl border border-slate-200">
                   <button
@@ -1885,7 +1915,7 @@ export default function App() {
               </div>
 
               {/* Sektor Filter Baris Karakter */}
-              <div className="md:col-span-5 flex flex-col gap-1.5 relative" ref={dropdownRef}>
+              <div className="md:col-span-3 flex flex-col gap-1.5 relative" ref={dropdownRef}>
                 <label className="text-xs font-bold text-slate-400 uppercase tracking-wider">Batasan Baris Huruf</label>
                 <button
                   type="button"
@@ -1944,6 +1974,81 @@ export default function App() {
                           }`}
                         >
                           <span>{row === 'Semua' ? 'Gunakan Semua Baris' : `Hanya Baris: ${row}`}</span>
+                          {isChecked && (
+                            <svg className="w-4 h-4 text-indigo-650 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7" />
+                            </svg>
+                          )}
+                        </button>
+                      );
+                    })}
+                  </div>
+                )}
+              </div>
+
+              {/* Sektor Tipe Soal Kuis */}
+              <div className="md:col-span-3 flex flex-col gap-1.5 relative" ref={typeDropdownRef}>
+                <label className="text-xs font-bold text-slate-400 uppercase tracking-wider">Tipe Soal Kuis</label>
+                <button
+                  type="button"
+                  onClick={() => setIsTypeDropdownOpen(!isTypeDropdownOpen)}
+                  className="w-full bg-slate-50 border border-slate-200 text-slate-700 py-2 px-3 rounded-xl text-xs font-semibold focus:outline-none focus:ring-2 focus:ring-indigo-500 text-left flex items-center justify-between shadow-sm hover:bg-slate-100/50 transition-colors"
+                >
+                  <span className="truncate">
+                    {selectedQuizTypes.includes('Semua')
+                      ? 'Semua Tipe Soal'
+                      : selectedQuizTypes.map(t => {
+                          const option = QUIZ_TYPE_OPTIONS.find(o => o.id === t);
+                          return option ? option.label : t;
+                        }).join(', ')}
+                  </span>
+                  <svg
+                    className={`w-4 h-4 text-slate-400 transition-transform duration-200 flex-shrink-0 ${
+                      isTypeDropdownOpen ? 'transform rotate-180' : ''
+                    }`}
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                  </svg>
+                </button>
+
+                {isTypeDropdownOpen && (
+                  <div className="absolute left-0 right-0 mt-1.5 bg-white border border-slate-200 rounded-xl shadow-lg z-50 max-h-60 overflow-y-auto p-1.5 flex flex-col gap-0.5 animate-fadeIn">
+                    {QUIZ_TYPE_OPTIONS.map((opt) => {
+                      const isChecked = selectedQuizTypes.includes(opt.id);
+                      return (
+                        <button
+                          key={opt.id}
+                          type="button"
+                          onClick={() => {
+                            if (opt.id === 'Semua') {
+                              setSelectedQuizTypes(['Semua']);
+                            } else {
+                              let newTypes = [...selectedQuizTypes];
+                              if (newTypes.includes('Semua')) {
+                                newTypes = newTypes.filter(t => t !== 'Semua');
+                              }
+                              
+                              if (isChecked) {
+                                newTypes = newTypes.filter(t => t !== opt.id);
+                                if (newTypes.length === 0) {
+                                  newTypes = ['Semua'];
+                                }
+                              } else {
+                                newTypes.push(opt.id);
+                              }
+                              setSelectedQuizTypes(newTypes);
+                            }
+                          }}
+                          className={`w-full text-left py-2 px-3 rounded-lg text-xs font-semibold flex items-center justify-between transition-colors ${
+                            isChecked
+                              ? 'bg-indigo-50 text-indigo-700'
+                              : 'text-slate-600 hover:bg-slate-50'
+                          }`}
+                        >
+                          <span>{opt.label}</span>
                           {isChecked && (
                             <svg className="w-4 h-4 text-indigo-650 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7" />
