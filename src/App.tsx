@@ -234,6 +234,33 @@ const normalizeSpeechText = (text: string): string =>
     .trim()
     .replace(/[\u3000\s.,/#!$%^&*;:{}=\-_`~()「」。、]/g, '');
 
+const deduplicateCharsAndWords = (text: string): string => {
+  if (!text) return '';
+  
+  // 1. Pecah dan hapus kata berulang dengan spasi (untuk romaji, misal: "so so so" -> "so")
+  const words = text.split(/[\s\u3000]+/);
+  const uniqueWords: string[] = [];
+  for (const w of words) {
+    if (!w.trim()) continue;
+    if (uniqueWords.length === 0 || w.trim().toLowerCase() !== uniqueWords[uniqueWords.length - 1].toLowerCase()) {
+      uniqueWords.push(w.trim());
+    }
+  }
+  
+  const jointWords = uniqueWords.join(' ');
+  
+  // 2. Untuk karakter Jepang berurutan tanpa spasi (misal: "ほほほ" -> "ほ")
+  if (jointWords.length > 1) {
+    const chars = [...jointWords];
+    const firstChar = chars[0];
+    if (chars.every(c => c === firstChar)) {
+      return firstChar;
+    }
+  }
+  
+  return jointWords;
+};
+
 const PHONETIC_MAP: Record<string, string[]> = {
   a: ['a', 'ah', 'are', 'ar', 'あ', 'ア', '阿', '亜'],
   i: ['i', 'ee', 'each', 'eat', 'い', 'イ', '胃', '意', '医', '井', '衣', '位', '委'],
@@ -246,8 +273,8 @@ const PHONETIC_MAP: Record<string, string[]> = {
   ke: ['ke', 'kay', 'care', 'け', 'ケ', '毛', '化'],
   ko: ['ko', 'co', 'core', 'こ', 'コ', '子', '個', '戸', '湖', '古'],
   sa: ['sa', 'sun', 'sah', 'さ', 'サ', '差', '左', '砂'],
-  shi: ['shi', 'she', 'see', 'し', 'シ', '四', '市', '死', '诗', '師', '志', '私'],
-  su: ['su', 'sue', 'soon', 'す', 'ス', '酢', '巣', '素', '数'],
+  shi: ['shi', 'she', 'see', 'し', 'シ', '四', '市', '死', '诗', '師', '志', '私', 'c', 'si', 'ci', 'shee'],
+  su: ['su', 'sue', 'soon', 'す', 'ス', '酢', '巣', '素', '数', 'so', 'sou', 'そ', 'ソ', 'そう', 's'],
   se: ['se', 'say', 'set', 'せ', 'セ', '背', '瀬'],
   so: ['so', 'sew', 'saw', 'そ', 'ソ', '粗', '祖', '素'],
   ta: ['ta', 'tar', 'touch', 'た', 'タ', '田', '多', '太'],
@@ -1157,12 +1184,6 @@ export default function App() {
       recognitionRef.current = null;
       clearTimeout(silenceTimeout);
 
-      // Jika error terjadi tetapi user sempat merekam suara, submit suara tersebut
-      if (!isAnsweredRef.current && latestTranscript) {
-        handleAnswerSubmit(latestTranscript);
-        return;
-      }
-
       const errorMessages: Record<string, string> = {
         'no-speech': 'Suara tidak terdengar. Silakan ketuk mic dan ucapkan lafalnya.',
         'audio-capture': 'Perangkat mikrofon tidak ditemukan. Sambungkan mic Anda.',
@@ -1180,33 +1201,28 @@ export default function App() {
       if (recognitionRef.current === recognition) {
         recognitionRef.current = null;
       }
-      // Fallback mobile: Jika mic otomatis berhenti dan user sempat berbicara, submit jawabannya
-      if (!isAnsweredRef.current && latestTranscript) {
-        handleAnswerSubmit(latestTranscript);
-      }
     };
 
     recognition.onresult = (event: SpeechRecognitionEvent) => {
       if (isAnsweredRef.current) return;
       resetSilenceTimeout();
 
-      const { transcript, isCorrect, isFinal } = evaluateSpeechResults(
+      const { transcript, isCorrect } = evaluateSpeechResults(
         event,
         currentQ.originalItem.kana,
         currentQ.correctAnswer
       );
 
       if (transcript) {
-        latestTranscript = transcript;
-        setSpeakingRecognizedText(`"${transcript}"`);
+        const cleanText = deduplicateCharsAndWords(transcript);
+        latestTranscript = cleanText;
+        setSpeakingRecognizedText(`"${cleanText}"`);
       }
 
       if (isCorrect) {
         clearTimeout(silenceTimeout);
         stopSpeechRecognition();
         handleAnswerSubmit(currentQ.correctAnswer);
-      } else if (isFinal && transcript) {
-        setSpeakingRecognizedText(`"${transcript}" — belum tepat. Silakan ucapkan kembali...`);
       }
     };
 
