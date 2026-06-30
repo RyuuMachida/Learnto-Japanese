@@ -283,10 +283,27 @@ const PHONETIC_MAP: Record<string, string[]> = {
   n: ['n', 'end', 'in', 'and', 'ん', 'ン', '運']
 };
 
+const isRepeatedRomaji = (spoken: string, expected: string): boolean => {
+  if (!spoken || !expected) return false;
+  const cleanSpoken = spoken.toLowerCase().trim();
+  const cleanExpected = expected.toLowerCase().trim();
+  if (cleanSpoken === cleanExpected) return true;
+
+  try {
+    const escaped = cleanExpected.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&');
+    const replaced = cleanSpoken.replace(new RegExp(escaped, 'g'), '');
+    return replaced === '';
+  } catch {
+    return false;
+  }
+};
+
 const isPhoneticMatch = (spoken: string, expected: string): boolean => {
   const cleanSpoken = normalizeSpeechText(spoken);
   const cleanExpected = expected.toLowerCase().trim();
   if (cleanSpoken === cleanExpected) return true;
+
+  if (isRepeatedRomaji(cleanSpoken, cleanExpected)) return true;
 
   const list = PHONETIC_MAP[cleanExpected];
   if (!list) return false;
@@ -294,7 +311,7 @@ const isPhoneticMatch = (spoken: string, expected: string): boolean => {
   const spokenHiragana = toHiragana(cleanSpoken);
   if (list.some((val) => {
     const v = val.toLowerCase();
-    return cleanSpoken === v || spokenHiragana === toHiragana(v);
+    return cleanSpoken === v || spokenHiragana === toHiragana(v) || isRepeatedRomaji(cleanSpoken, v);
   })) {
     return true;
   }
@@ -315,6 +332,7 @@ const isSpeechCorrect = (resultText: string, kana: string, romaji: string): bool
 
   if (resultHiragana.includes(normalizedKana)) return true;
   if (cleanResult === cleanRomaji) return true;
+  if (isRepeatedRomaji(cleanResult, cleanRomaji)) return true;
 
   if (cleanRomaji.length >= 2 && cleanResult.includes(cleanRomaji)) return true;
 
