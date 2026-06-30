@@ -1588,7 +1588,7 @@ export default function App() {
     // Label Inggris
     ctx.fillStyle = '#4f46e5';
     ctx.font = 'bold 28px sans-serif';
-    ctx.fillText('HIRAKANA LEARNTO CERTIFICATE', width / 2, 130);
+    ctx.fillText('LEARNTOJAPANESE CERTIFICATE', width / 2, 130);
 
     // Judul Utama Kaligrafi Jepang
     ctx.fillStyle = '#0f172a'; // slate-900
@@ -1596,7 +1596,7 @@ export default function App() {
     ctx.fillText('日本語の修了証', width / 2, 190); 
     ctx.font = '400 24px sans-serif';
     ctx.fillStyle = '#64748b'; // slate-500
-    ctx.fillText('(Sertifikat Kelulusan Hirakana Learnto)', width / 2, 280);
+    ctx.fillText('(Sertifikat Kelulusan LearnToJapanese)', width / 2, 280);
 
     // Garis pemisah tradisional
     ctx.beginPath();
@@ -1748,7 +1748,7 @@ export default function App() {
     ctx.fillStyle = '#94a3b8'; // slate-400
     ctx.font = 'normal 24px sans-serif';
     ctx.fillText(`Tanggal: ${formattedDate}`, 100, height - 220);
-    ctx.fillText('Platform Pembelajaran: Hirakana Learnto Pro', 100, height - 170);
+    ctx.fillText('Platform Pembelajaran: LearnToJapanese Pro', 100, height - 170);
 
     // Konversikan rendering canvas ke URL base64 gambar
     const dataUrl = canvas.toDataURL('image/png');
@@ -1821,7 +1821,7 @@ export default function App() {
               <span className="text-xl leading-none select-none">🎌</span>
             </div>
             <div>
-              <h1 className="text-xl font-extrabold text-slate-900 tracking-tight">Hirakana Learnto</h1>
+              <h1 className="text-xl font-extrabold text-slate-900 tracking-tight">LearnToJapanese</h1>
               <p className="text-xs text-slate-500">Learn Japanese Mother Father</p>
             </div>
           </div>
@@ -2944,7 +2944,7 @@ export default function App() {
       {/* FOOTER */}
       <footer className="border-t border-slate-200 bg-white px-4 py-6 mt-auto">
         <div className="max-w-5xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-400">
-          <p>© 2026 Hiragana Learnto. All rights reserved.</p>
+          <p>© 2026 LearnToJapanese. All rights reserved.</p>
           <a
             href="https://github.com/RyuuMachida"
             target="_blank"
