@@ -276,46 +276,46 @@ const PHONETIC_MAP: Record<string, string[]> = {
   u: ['u', 'oo', 'who', 'you', 'yoo', 'uh', 'o', 'to', 'two', 'through', 'up', 'us', 'う', 'ウ', '宇', '有', '羽'],
   e: ['e', 'eh', 'ay', 'a', 'he', 'hey', 'pay', 'え', 'エ', '絵', '重', '衣'],
   o: ['o', 'oh', 'owe', 'or', 'all', 'ok', 'of', 'on', 'who', 'wo', 'を', 'ヲ', 'おう', 'お', 'オ', '尾', '男', '御'],
-  ka: ['ka', 'car', 'cut', 'か', 'カ', '蚊', '課', '科', '香', '下', '化', '加'],
-  ki: ['ki', 'key', 'gee', 'き', 'キ', '木', '気', '期', '機', '黄', '来'],
-  ku: ['ku', 'coo', 'cool', 'く', 'ク', '区', '苦', '九', '工'],
-  ke: ['ke', 'kay', 'care', 'け', 'ケ', '毛', '化'],
-  ko: ['ko', 'co', 'core', 'こ', 'コ', '子', '個', '戸', '湖', '古'],
-  sa: ['sa', 'sun', 'sah', 'さ', 'サ', '差', '左', '砂'],
-  shi: ['shi', 'she', 'see', 'し', 'シ', '四', '市', '死', '诗', '師', '志', '私', 'c', 'si', 'ci', 'shee'],
-  su: ['su', 'sue', 'soon', 'す', 'ス', '酢', '巣', '素', '数', 'so', 'sou', 'そ', 'ソ', 'そう', 's'],
-  se: ['se', 'say', 'set', 'せ', 'セ', '背', '瀬'],
-  so: ['so', 'sew', 'saw', 'そ', 'ソ', '粗', '祖', '素'],
-  ta: ['ta', 'tar', 'touch', 'た', 'タ', '田', '多', '太'],
-  chi: ['chi', 'chee', 'cheap', 'she', 'tea', 'qi', 'key', 'ci', 'c', 'ち', 'チ', '血', '地', '知', '千'],
-  tsu: ['tsu', 'too', 'two', 'sue', 'ts', 'chu', 'zu', 'zoo', 'つ', 'ツ', '津', '都'],
-  te: ['te', 'tay', 'take', 'て', 'テ', '手', '天'],
-  to: ['to', 'toe', 'two', 'と', 'ト', '都', '図', '戸', '外'],
-  na: ['na', 'nah', 'now', 'な', 'ナ', '名', '菜', '無'],
-  ni: ['ni', 'knee', 'near', 'に', 'ニ', '二', '荷', '似'],
-  nu: ['nu', 'new', 'noo', 'ぬ', 'ヌ'],
-  ne: ['ne', 'nay', 'net', 'ね', 'ネ', '根', '音'],
-  no: ['no', 'know', 'の', 'ノ', '野'],
-  ha: ['ha', 'hah', 'hot', 'は', 'ハ', '歯', '葉', '波', '羽'],
-  hi: ['hi', 'hee', 'he', 'ひ', 'ヒ', '火', '日', '比', '非', '避'],
-  fu: ['fu', 'who', 'foo', 'hu', 'full', 'for', 'ふ', 'フ', '二', '府', '婦', '夫', '符'],
-  he: ['he', 'hay', 'hair', 'へ', 'ヘ', '経', '辺', '屁'],
-  ho: ['ho', 'hoe', 'home', 'ほ', 'ホ', '帆', '歩', '火', '保'],
-  ma: ['ma', 'mah', 'my', 'ま', 'マ', '間', '真', '魔'],
-  mi: ['mi', 'mee', 'me', 'み', 'ミ', '実', '身', '見', '美', '三'],
-  mu: ['mu', 'moo', 'move', 'む', 'ム', '無', '六', '牟'],
-  me: ['me', 'may', 'met', 'め', 'メ', '目', '芽', '女'],
-  mo: ['mo', 'more', 'mow', 'も', 'モ', '藻', '毛', '百'],
-  ya: ['ya', 'yah', 'yard', 'や', 'ヤ', '矢', '屋', '夜', '八'],
-  yu: ['yu', 'you', 'yoo', 'ゆ', 'ユ', '湯', '弓', '由', '輸'],
-  yo: ['yo', 'yow', 'your', 'よ', 'ヨ', '夜', '余', '四', '与'],
-  ra: ['ra', 'rah', 'run', 'ら', 'ラ', '等', '裸'],
-  ri: ['ri', 'ree', 're', 'り', 'リ', '利', '理', 'RE', 'ri.', '里', '陸'],
-  ru: ['ru', 'roo', 'rule', 'る', 'ル', '留', '流', '類'],
-  re: ['re', 'ray', 'red', 'れ', 'レ', '例', '礼', '冷'],
-  ro: ['ro', 'row', 'road', 'ろ', 'ロ', '路', '炉', '露'],
-  wa: ['wa', 'wah', 'one', 'わ', 'ワ', '輪', '和', '話'],
-  wo: ['wo', 'war', 'whoa', 'を', 'ヲ', 'ウォ'],
+  ka: ['ka', 'car', 'cut', 'kah', 'a', 'ah', 'ca', 'c', 'k', 'か', 'カ', '蚊', '課', '科', '香', '下', '化', '加'],
+  ki: ['ki', 'key', 'gee', 'kih', 'i', 'ee', 'qi', 'gee', 'き', 'キ', '木', '気', '期', '機', '黄', '来'],
+  ku: ['ku', 'coo', 'cool', 'kuh', 'u', 'oo', 'q', 'koo', 'く', 'ク', '区', '苦', '九', '工'],
+  ke: ['ke', 'kay', 'care', 'keh', 'e', 'eh', 'k', 'け', 'ケ', '毛', '化'],
+  ko: ['ko', 'co', 'core', 'koh', 'o', 'oh', 'co', 'go', 'k', 'こ', 'コ', '子', '個', '戸', '湖', '古'],
+  sa: ['sa', 'sun', 'sah', 'a', 'ah', 's', 'さ', 'サ', '差', '左', '砂'],
+  shi: ['shi', 'she', 'see', 'し', 'シ', '四', '市', '死', '静', '師', '志', '私', 'c', 'si', 'ci', 'shee', 'i', 'ee'],
+  su: ['su', 'sue', 'soon', 'す', 'ス', '酢', '巣', '素', '数', 'so', 'sou', 'そ', 'ソ', 'そう', 's', 'u', 'oo'],
+  se: ['se', 'say', 'set', 'seh', 'e', 'eh', 's', 'せ', 'セ', '背', '瀬'],
+  so: ['so', 'sew', 'saw', 'soh', 'o', 'oh', 's', 'そ', 'ソ', '粗', '祖', '素'],
+  ta: ['ta', 'tar', 'touch', 'tah', 'a', 'ah', 't', 'た', 'タ', '田', '多', '太'],
+  chi: ['chi', 'chee', 'cheap', 'she', 'tea', 'qi', 'key', 'ci', 'c', 'i', 'ee', 't', 'ち', 'チ', '血', '地', '知', '千'],
+  tsu: ['tsu', 'too', 'two', 'sue', 'ts', 'chu', 'zu', 'zoo', 'u', 'oo', 't', 'つ', 'ツ', '津', '都'],
+  te: ['te', 'tay', 'take', 'teh', 'e', 'eh', 't', 'て', 'テ', '手', '天'],
+  to: ['to', 'toe', 'two', 'toh', 'o', 'oh', 't', 'と', 'ト', '都', '図', '戸', '外'],
+  na: ['na', 'nah', 'now', 'nah', 'a', 'ah', 'n', 'な', 'ナ', '名', '菜', '無'],
+  ni: ['ni', 'knee', 'near', 'nih', 'i', 'ee', 'n', 'に', 'ニ', '二', '荷', '似'],
+  nu: ['nu', 'new', 'noo', 'nuh', 'u', 'oo', 'n', 'ぬ', 'ヌ'],
+  ne: ['ne', 'nay', 'net', 'neh', 'e', 'eh', 'n', 'ね', 'ネ', '根', '音'],
+  no: ['no', 'know', 'noh', 'o', 'oh', 'n', 'の', 'ノ', '野'],
+  ha: ['ha', 'hah', 'hot', 'a', 'ah', 'h', 'は', 'ハ', '歯', '葉', '波', '羽'],
+  hi: ['hi', 'hee', 'he', 'i', 'ee', 'h', 'ひ', 'ヒ', '火', '日', '比', '非', '避'],
+  fu: ['fu', 'who', 'foo', 'hu', 'full', 'for', 'f', 'u', 'oo', 'ふ', 'フ', '二', '府', '婦', '夫', '符'],
+  he: ['he', 'hay', 'hair', 'heh', 'e', 'eh', 'hei', 'hey', 'h', 'へ', 'ヘ', '経', '辺', '屁'],
+  ho: ['ho', 'hoe', 'home', 'hoh', 'o', 'oh', 'how', 'h', 'ほ', 'ホ', '帆', '歩', '火', '保'],
+  ma: ['ma', 'mah', 'my', 'mah', 'a', 'ah', 'm', 'ま', 'マ', '間', '真', '魔'],
+  mi: ['mi', 'mee', 'me', 'mih', 'i', 'ee', 'm', 'み', 'ミ', '実', '身', '見', '美', '三'],
+  mu: ['mu', 'moo', 'move', 'muh', 'u', 'oo', 'm', 'む', 'ム', '無', '六', '牟'],
+  me: ['me', 'may', 'met', 'meh', 'e', 'eh', 'm', 'め', 'メ', '目', '芽', '女'],
+  mo: ['mo', 'more', 'mow', 'moh', 'o', 'oh', 'm', 'も', 'モ', '藻', '毛', '百'],
+  ya: ['ya', 'yah', 'yard', 'a', 'ah', 'y', 'や', 'ヤ', '矢', '屋', '夜', '八'],
+  yu: ['yu', 'you', 'yoo', 'yuh', 'u', 'oo', 'y', 'ゆ', 'ユ', '湯', '弓', '由', '輸'],
+  yo: ['yo', 'yow', 'your', 'yoh', 'o', 'oh', 'y', 'よ', 'ヨ', '夜', '余', '四', '与'],
+  ra: ['ra', 'rah', 'run', 'rah', 'a', 'ah', 'r', 'ら', 'ラ', '等', '裸'],
+  ri: ['ri', 'ree', 're', 'rih', 'i', 'ee', 'RE', 'ri.', 'r', 'り', 'リ', '利', '理', '里', '陸'],
+  ru: ['ru', 'roo', 'rule', 'ruh', 'u', 'oo', 'r', 'る', 'ル', '留', '流', '類'],
+  re: ['re', 'ray', 'red', 'reh', 'e', 'eh', 'r', 'れ', 'レ', '例', '礼', '冷'],
+  ro: ['ro', 'row', 'road', 'roh', 'o', 'oh', 'r', 'ろ', 'ロ', '路', '炉', '露'],
+  wa: ['wa', 'white', 'one', 'wah', 'a', 'ah', 'w', 'わ', 'ワ', '輪', '和', '話'],
+  wo: ['wo', 'war', 'whoa', 'woh', 'o', 'oh', 'w', 'を', 'ヲ', 'ウォ'],
   n: ['n', 'end', 'in', 'and', 'ん', 'ン', '運']
 };
 
@@ -403,7 +403,8 @@ const evaluateSpeechResults = (
       const alt = result[j].transcript.trim();
       if (!alt) continue;
       transcript = alt;
-      if (isSpeechCorrect(alt, kana, romaji)) {
+      const cleanAlt = deduplicateCharsAndWords(alt);
+      if (isSpeechCorrect(alt, kana, romaji) || isSpeechCorrect(cleanAlt, kana, romaji)) {
         return { transcript: alt, isCorrect: true, isFinal: result.isFinal };
       }
     }
@@ -1027,7 +1028,6 @@ export default function App() {
 
     // Lulus — jumlah coretan benar!
     setCheckingStatus('success');
-    setValidationMessage('Coretan Benar!');
     playTeneng();
     setTimeout(() => {
       setCheckingStatus('idle');
@@ -1084,7 +1084,6 @@ export default function App() {
 
     // Lulus — jumlah coretan benar!
     setCheckingStatus('success');
-    setValidationMessage('Coretan Benar!');
     playTeneng();
     setTimeout(() => {
       setCheckingStatus('idle');
@@ -2843,23 +2842,23 @@ export default function App() {
             </div>
 
             {/* Statistik Ringkas */}
-            <div className="grid grid-cols-3 gap-4">
-              <div className="bg-slate-50 p-4 rounded-2xl border border-slate-150 text-center">
-                <span className="text-[10px] font-extrabold text-slate-400 uppercase tracking-wider block mb-1">Total Skor</span>
-                <p className="text-2xl font-black text-indigo-600">{score} / {quizQuestions.length}</p>
-                <p className="text-[10px] text-slate-500 mt-1">Selesai dijawab</p>
+            <div className="grid grid-cols-3 gap-1.5 sm:gap-4">
+              <div className="bg-slate-50 p-2 sm:p-4 rounded-2xl border border-slate-150 text-center">
+                <span className="text-[9px] sm:text-[10px] font-extrabold text-slate-400 uppercase tracking-wider block mb-1">Total Skor</span>
+                <p className="text-base sm:text-2xl font-black text-indigo-600">{score} / {quizQuestions.length}</p>
+                <p className="text-[9px] sm:text-[10px] text-slate-500 mt-1">Selesai dijawab</p>
               </div>
-              <div className="bg-slate-50 p-4 rounded-2xl border border-slate-150 text-center">
-                <span className="text-[10px] font-extrabold text-slate-400 uppercase tracking-wider block mb-1">Durasi Kuis</span>
-                <p className="text-2xl font-black text-indigo-600">{formatTime(quizTime)}</p>
-                <p className="text-[10px] text-slate-500 mt-1">Waktu tempuh</p>
+              <div className="bg-slate-50 p-2 sm:p-4 rounded-2xl border border-slate-150 text-center">
+                <span className="text-[9px] sm:text-[10px] font-extrabold text-slate-400 uppercase tracking-wider block mb-1">Durasi Kuis</span>
+                <p className="text-base sm:text-2xl font-black text-indigo-600">{formatTime(quizTime)}</p>
+                <p className="text-[9px] sm:text-[10px] text-slate-500 mt-1">Waktu tempuh</p>
               </div>
-              <div className="bg-slate-50 p-4 rounded-2xl border border-slate-150 text-center">
-                <span className="text-[10px] font-extrabold text-slate-400 uppercase tracking-wider block mb-1">Akurasi Kelulusan</span>
-                <p className="text-2xl font-black text-emerald-600">
+              <div className="bg-slate-50 p-2 sm:p-4 rounded-2xl border border-slate-150 text-center">
+                <span className="text-[9px] sm:text-[10px] font-extrabold text-slate-400 uppercase tracking-wider block mb-1">Akurasi Kelulusan</span>
+                <p className="text-base sm:text-2xl font-black text-emerald-600">
                   {Math.round((score / quizQuestions.length) * 100)}%
                 </p>
-                <p className="text-[10px] text-slate-500 mt-1">Kecocokan jawaban</p>
+                <p className="text-[9px] sm:text-[10px] text-slate-500 mt-1">Kecocokan jawaban</p>
               </div>
             </div>
 
@@ -2870,7 +2869,7 @@ export default function App() {
                 <p className="text-xs text-slate-500 mt-0.5">Tulis nama Anda di bawah untuk mengompilasi lembar prestasi beresolusi tinggi ke status WhatsApp atau Instagram Anda.</p>
               </div>
               
-              <div className="flex gap-2">
+              <div className="flex flex-col sm:flex-row gap-2">
                 <input
                   type="text"
                   placeholder="Ketik nama Anda di sini..."
@@ -2880,7 +2879,7 @@ export default function App() {
                 />
                 <button
                   onClick={generateStatusCard}
-                  className="bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-xs px-5 py-2.5 rounded-xl transition-all shadow-md shadow-indigo-600/10 flex items-center gap-1.5"
+                  className="bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-xs px-5 py-2.5 rounded-xl transition-all shadow-md shadow-indigo-600/10 flex items-center justify-center gap-1.5 w-full sm:w-auto whitespace-nowrap active:scale-95"
                 >
                   <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
